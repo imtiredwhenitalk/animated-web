@@ -1,40 +1,22 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* Земля крутиться */
+@keyframes surfaceMove {
+  from { background-position: 0% 0%; }
+  to   { background-position: 200% 0%; }
 }
 
-.Animated-Loader {
-    position: fixed;
-    inset: 0;
-    z-index: 1000;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    backdrop-filter: blur(20px);
+@keyframes cloudsMove {
+  from { background-position: 100% 0%; }
+  to   { background-position: 0% 0%; }
 }
 
-.loading-screen {
-    width: 80px;
-    height: 80px;
-    border: 8px solid rgba(255, 255, 255, 0.2);
-    border-top-color: white;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    background: black;
+/* Орбіта */
+@keyframes orbitSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
 }
 
-h2 {
-    color: white;
-    font-size: 24px;
-    margin-bottom: 16px;
-    text-align: center;
-}
-
-p {
-    color: white;
-    font-size: 16px;
-    text-align: center;
-    margin-bottom: 24px;
+/* Крапки */
+@keyframes dotpulse {
+  0%, 100% { opacity: 0.15; }
+  50%       { opacity: 1; }
 }
