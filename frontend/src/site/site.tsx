@@ -23,7 +23,7 @@ export default function Example() {
         playsInline
         className="fixed inset-0 w-full h-full object-cover z-0 opacity-90"
       >
-        <source src="/assets/earth3.mp4" type="video/mp4" />
+        <source src="/assets/earth2.mp4" type="video/mp4" />
       </video>
 
       {/* Темний оверлей */}

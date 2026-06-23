@@ -3,5 +3,4 @@ backend/package-lock.json
 
 frontend/node_modules
 frontend/package-lock.json
-frontend/src/assets/earth2.mp4
-frontend/public/assets/earth2.mp4
+
