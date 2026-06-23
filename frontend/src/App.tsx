@@ -1,5 +1,5 @@
 import Animated_Loader from './components/Loader'
-import Example from './site/site'
+import Example from './site/earth'
 import './App.css'
 
 function App() {

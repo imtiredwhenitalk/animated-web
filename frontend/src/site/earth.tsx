@@ -3,10 +3,10 @@ import { Dialog, DialogPanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 
 const navigation = [
-  { name: 'Product', href: '#' },
-  { name: 'Features', href: '#' },
-  { name: 'Marketplace', href: '#' },
-  { name: 'Company', href: '#' },
+  { name: 'Planets', href: '#' },
+  { name: 'Constellation', href: '#' },
+  { name: 'Earth', href: '#' },
+  { name: 'Move to another planet', href: '#' },
 ]
 
 export default function Example() {
@@ -38,7 +38,7 @@ export default function Example() {
             {/* Логотип */}
             <div className="flex lg:flex-1">
               <a href="#" className="-m-1.5 p-1.5">
-                <span className="sr-only">Welcome to animated web site</span>
+                <span className="sr-only">Earth</span>
                 <img
                   alt=""
                   src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=white&shade=400"
@@ -78,7 +78,7 @@ export default function Example() {
                 href="#"
                 className="text-sm/6 font-semibold text-white hover:text-indigo-300 transition-colors"
               >
-                Log in <span aria-hidden="true">&rarr;</span>
+                Settings <span aria-hidden="true">&rarr;</span>
               </a>
             </div>
 
@@ -90,7 +90,7 @@ export default function Example() {
             <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-gray-900 p-6 sm:max-w-sm sm:ring-1 sm:ring-white/10">
               <div className="flex items-center justify-between">
                 <a href="#" className="-m-1.5 p-1.5">
-                  <span className="sr-only">Welcome to animated web site</span>
+                  <span className="sr-only">Earth</span>
                   <img
                     alt=""
                     src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=white&shade=400"
@@ -125,7 +125,7 @@ export default function Example() {
                       href="#"
                       className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-white hover:bg-white/10"
                     >
-                      Log in
+                      Settings
                     </a>
                   </div>
                 </div>
@@ -140,27 +140,26 @@ export default function Example() {
           <div className="max-w-xl lg:max-w-2xl lg:ml-24 py-32 sm:py-48 lg:py-56">
             <h1 className="text-5xl font-semibold tracking-tight text-white sm:text-7xl leading-tight">
               Welcome to the{' '}
-              <span className="text-indigo-400">animated</span>{' '}
-              web{' '}
-              <span className="text-indigo-300">app!</span>
+              <span className="text-indigo-400">Earth</span>{' '}
+              {' '}
+              <span className="text-indigo-300"></span>
             </h1>
             <p className="mt-8 text-lg font-medium text-gray-300 sm:text-xl/8">
-              This is a simple animated web application built with React and Tailwind CSS.
-              It features a loading screen, smooth transitions, and interactive elements
-              to enhance the user experience.
+              Earth is the third planet from the Sun and the only astronomical object known to harbor life.
+              About 29.2% of Earth's surface is land with remaining 70.8% covered with water.
+              Earth's distance from the Sun, physical properties and geological history have allowed life to evolve and thrive.
             </p>
             <div className="mt-10 flex items-center gap-x-6">
               <a
                 href="#"
                 className="rounded-md bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow hover:bg-indigo-500 transition-colors"
               >
-                Get started
+                Learn more
               </a>
               <a
                 href="#"
                 className="text-sm/6 font-semibold text-white hover:text-indigo-300 transition-colors"
               >
-                Learn more <span aria-hidden="true">→</span>
               </a>
             </div>
           </div>
