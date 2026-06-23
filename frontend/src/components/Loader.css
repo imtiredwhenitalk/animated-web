@@ -1,22 +1,22 @@
-/* Земля крутиться */
-@keyframes surfaceMove {
-  from { background-position: 0% 0%; }
-  to   { background-position: 200% 0%; }
+/* Прибирає чорний фон через screen blend mode */
+.loader-planet-video {
+  mix-blend-mode: screen;
+  filter: contrast(1.15) brightness(1.1) saturate(1.1);
 }
 
-@keyframes cloudsMove {
-  from { background-position: 100% 0%; }
-  to   { background-position: 0% 0%; }
-}
-
-/* Орбіта */
-@keyframes orbitSpin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
+/* Якщо фон лоадера темний — screen працює */
+.loader-planet-container {
+  background: transparent;
 }
 
 /* Крапки */
-@keyframes dotpulse {
+.loader-dot {
+  animation: dotPulse 1.4s ease-in-out infinite;
+}
+.loader-dot-2 { animation-delay: 0.2s; }
+.loader-dot-3 { animation-delay: 0.4s; }
+
+@keyframes dotPulse {
   0%, 100% { opacity: 0.15; }
   50%       { opacity: 1; }
 }

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import './Loader.css'
 
 function Animated_Loader({ children }: { children: React.ReactNode }) {
   const [progress, setProgress] = useState(0)
@@ -11,16 +12,12 @@ function Animated_Loader({ children }: { children: React.ReactNode }) {
         return prev + 1
       })
     }, 28)
-
     const timer = setTimeout(() => startExit(), 3000)
-
     return () => { clearInterval(interval); clearTimeout(timer) }
   }, [])
 
   useEffect(() => {
-    const skip = (e: KeyboardEvent) => {
-      if (phase === 'loading') startExit()
-    }
+    const skip = () => { if (phase === 'loading') startExit() }
     window.addEventListener('keydown', skip)
     return () => window.removeEventListener('keydown', skip)
   }, [phase])
@@ -28,171 +25,121 @@ function Animated_Loader({ children }: { children: React.ReactNode }) {
   const startExit = () => {
     if (phase !== 'loading') return
     setPhase('fadeout')
-    setTimeout(() => setPhase('done'), 1000)
+    setTimeout(() => setPhase('done'), 1200)
   }
 
   return (
     <>
-      {/* ── Головний сайт — ЗАВЖДИ в DOM, просто захований під лоадером ── */}
-      <div className={`transition-all duration-1000 ease-in-out ${
-        phase === 'loading'
-          ? 'opacity-0 scale-[1.03] blur-sm pointer-events-none'
-          : phase === 'fadeout'
-          ? 'opacity-100 scale-100 blur-none'
-          : 'opacity-100 scale-100 blur-none'
-      }`}>
+      {/* ── Планета — тільки під час лоадера ── */}
+      {phase !== 'done' && (
+        <div
+          className="fixed z-[9998] pointer-events-none"
+          style={
+            phase === 'loading'
+              ? {
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  width: '400px',
+                  height: '400px',
+                  transition: 'none',
+                  opacity: 1,
+                }
+              : {
+                  top: '-15%',
+                  right: '-10%',
+                  left: 'auto',
+                  transform: 'none',
+                  width: '1000px',
+                  height: '1000px',
+                  transition: 'all 1200ms cubic-bezier(0.4, 0, 0.2, 1)',
+                  opacity: 0,
+                }
+          }
+        >
+          <video
+            autoPlay muted loop playsInline
+            className="w-full h-full object-contain"
+          >
+            <source src="/assets/planet.webm" type="video/webm" />
+            <source src="/assets/planet.mp4" type="video/mp4" />
+          </video>
+        </div>
+      )}
+
+      {/* ── Головний сайт ── */}
+      <div
+        style={{
+          transition: 'opacity 1000ms ease-in-out, filter 1000ms ease-in-out, transform 1000ms ease-in-out',
+          opacity: phase === 'loading' ? 0 : 1,
+          filter: phase === 'loading' ? 'blur(4px)' : 'blur(0px)',
+          transform: phase === 'loading' ? 'scale(1.02)' : 'scale(1)',
+          pointerEvents: phase === 'loading' ? 'none' : 'auto',
+        }}
+      >
         {children}
       </div>
 
-      {/* ── Лоадер — поверх сайту, зникає ── */}
+      {/* ── Лоадер фон + UI ── */}
       {phase !== 'done' && (
         <div
-          className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center gap-8 bg-[#00000F] overflow-hidden transition-all duration-1000 ease-in-out ${
-            phase === 'fadeout'
-              ? 'opacity-0 scale-110 blur-md pointer-events-none'
-              : 'opacity-100 scale-100 blur-none'
-          }`}
+          className="fixed inset-0 z-[9997] overflow-hidden"
+          style={{
+            opacity: phase === 'fadeout' ? 0 : 1,
+            transition: 'opacity 1200ms ease-in-out',
+            pointerEvents: phase === 'fadeout' ? 'none' : 'auto',
+          }}
         >
-          {/* Зірки */}
-          <Stars />
+          {/* Космос */}
+          <video
+            autoPlay muted loop playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+          >
+            <source src="/assets/cosmos.mp4" type="video/mp4" />
+          </video>
 
-          {/* Земля */}
-          <EarthScene />
+          <div className="absolute inset-0 bg-black/50" />
 
-          {/* Текст */}
-          <div className="text-center z-10 relative">
-            <h1 className="text-2xl font-bold tracking-[0.3em] text-white mb-2 uppercase">
-              Exploring
-              <span className="text-sky-400 animate-[dotpulse_1.4s_ease-in-out_infinite]">.</span>
-              <span className="text-sky-400 animate-[dotpulse_1.4s_ease-in-out_0.2s_infinite]">.</span>
-              <span className="text-sky-400 animate-[dotpulse_1.4s_ease-in-out_0.4s_infinite]">.</span>
-            </h1>
-            <p className="text-xs text-sky-200/60 tracking-[0.2em] uppercase">
-              Preparing your experience
-            </p>
-          </div>
+          {/* UI */}
+          <div className="relative z-10 flex flex-col items-center justify-center h-full gap-8">
 
-          {/* Прогрес */}
-          <div className="flex items-center gap-3 z-10 relative">
-            <div className="w-56 h-[3px] bg-white/10 rounded-full overflow-hidden">
-              <div
-                className="h-full bg-gradient-to-r from-blue-600 to-sky-400 rounded-full transition-all duration-100 shadow-[0_0_8px_rgba(56,189,248,0.6)]"
-                style={{ width: `${progress}%` }}
-              />
+            {/* Місце планети */}
+            <div style={{ width: 400, height: 400 }} />
+
+            {/* Текст */}
+            <div className="text-center -mt-2">
+              <p className="text-white/90 text-sm font-semibold tracking-[0.25em] uppercase mb-2">
+                Loading
+                <span className="loader-dot text-emerald-400">.</span>
+                <span className="loader-dot loader-dot-2 text-emerald-400">.</span>
+                <span className="loader-dot loader-dot-3 text-emerald-400">.</span>
+              </p>
+              <p className="text-white/30 text-xs tracking-widest uppercase">
+                Preparing your experience
+              </p>
             </div>
-            <span className="text-xs text-sky-300/60 min-w-[36px] font-mono">
-              {progress}%
-            </span>
+
+            {/* Прогрес */}
+            <div className="flex flex-col items-center gap-2">
+              <div className="w-48 h-[2px] bg-white/10 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-gradient-to-r from-emerald-600 to-emerald-300 rounded-full transition-all duration-100"
+                  style={{
+                    width: `${progress}%`,
+                    boxShadow: '0 0 6px rgba(110,231,183,0.7)',
+                  }}
+                />
+              </div>
+              <span className="text-white/30 text-[11px] font-mono">{progress}%</span>
+            </div>
           </div>
 
-          {/* Skip */}
-          <p className="absolute bottom-8 text-xs text-white/20 tracking-widest uppercase animate-pulse">
+          <p className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/20 text-[11px] tracking-widest uppercase animate-pulse">
             Press any key to skip
           </p>
         </div>
       )}
     </>
-  )
-}
-
-/* ── Зірки (3 шари через inline style бо Tailwind не генерує bg-image) ── */
-function Stars() {
-  return (
-    <>
-      <div
-        className="absolute inset-0 animate-pulse"
-        style={{
-          backgroundImage: `
-            radial-gradient(1px 1px at 20px 30px, white, transparent),
-            radial-gradient(1px 1px at 80px 10px, white, transparent),
-            radial-gradient(1px 1px at 140px 70px, white, transparent),
-            radial-gradient(1px 1px at 60px 150px, white, transparent),
-            radial-gradient(1px 1px at 170px 120px, white, transparent),
-            radial-gradient(1px 1px at 10px 100px, white, transparent),
-            radial-gradient(1px 1px at 100px 50px, white, transparent),
-            radial-gradient(1px 1px at 190px 180px, white, transparent)
-          `,
-          backgroundSize: '200px 200px',
-          opacity: 0.5,
-        }}
-      />
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage: `
-            radial-gradient(1px 1px at 50px 80px, #bae6fd, transparent),
-            radial-gradient(1px 1px at 120px 40px, #bae6fd, transparent),
-            radial-gradient(1px 1px at 30px 160px, #bae6fd, transparent),
-            radial-gradient(1px 1px at 160px 90px, #bae6fd, transparent),
-            radial-gradient(2px 2px at 90px 130px, white, transparent)
-          `,
-          backgroundSize: '300px 300px',
-          opacity: 0.35,
-        }}
-      />
-    </>
-  )
-}
-
-/* ── Земля ── */
-function EarthScene() {
-  return (
-    <div className="relative w-48 h-48 flex items-center justify-center z-10">
-      {/* Свічення навколо */}
-      <div className="absolute w-44 h-44 rounded-full bg-blue-500/10 blur-2xl animate-pulse" />
-
-      {/* Сама планета */}
-      <div
-        className="relative w-36 h-36 rounded-full overflow-hidden shadow-[inset_-16px_-8px_32px_rgba(0,0,0,0.7),0_0_32px_rgba(96,165,250,0.25)]"
-      >
-        {/* Поверхня — крутиться */}
-        <div
-          className="absolute inset-0 rounded-full"
-          style={{
-            background: `
-              radial-gradient(ellipse at 30% 40%, #1a6b3c 0%, transparent 35%),
-              radial-gradient(ellipse at 65% 30%, #1a5c35 0%, transparent 28%),
-              radial-gradient(ellipse at 50% 65%, #1d7a42 0%, transparent 30%),
-              radial-gradient(ellipse at 80% 55%, #1a6b3c 0%, transparent 22%),
-              linear-gradient(135deg, #1565c0 0%, #0d47a1 40%, #1976d2 70%, #0d47a1 100%)
-            `,
-            backgroundSize: '200% 200%',
-            animation: 'surfaceMove 12s linear infinite',
-          }}
-        />
-
-        {/* Хмари */}
-        <div
-          className="absolute inset-0 rounded-full"
-          style={{
-            background: `
-              radial-gradient(ellipse at 20% 30%, rgba(255,255,255,0.55) 0%, transparent 22%),
-              radial-gradient(ellipse at 70% 20%, rgba(255,255,255,0.35) 0%, transparent 18%),
-              radial-gradient(ellipse at 50% 72%, rgba(255,255,255,0.28) 0%, transparent 16%),
-              radial-gradient(ellipse at 85% 55%, rgba(255,255,255,0.45) 0%, transparent 20%)
-            `,
-            backgroundSize: '200% 200%',
-            animation: 'cloudsMove 8s linear infinite',
-          }}
-        />
-
-        {/* Відблиск */}
-        <div
-          className="absolute inset-0 rounded-full"
-          style={{
-            background: 'radial-gradient(ellipse at 35% 32%, rgba(255,255,255,0.13) 0%, transparent 55%)',
-          }}
-        />
-      </div>
-
-      {/* Орбіта з супутником */}
-      <div
-        className="absolute w-48 h-48 rounded-full border border-sky-400/15"
-        style={{ animation: 'orbitSpin 4s linear infinite' }}
-      >
-        <div className="absolute -top-[5px] left-1/2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-sky-300 shadow-[0_0_8px_#7dd3fc]" />
-      </div>
-    </div>
   )
 }
 
