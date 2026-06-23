@@ -1,13 +1,12 @@
-import Example from './site/site.tsx'
-import Animated_Loader from './components/Loader.tsx'
+import Animated_Loader from './components/Loader'
+import Example from './site/site'
 import './App.css'
 
 function App() {
   return (
-    <>
-      <Animated_Loader />
+    <Animated_Loader>
       <Example />
-    </>
+    </Animated_Loader>
   )
 }
 
