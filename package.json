@@ -25,13 +25,12 @@
     "lint-staged": "^16.1.2",
     "prettier": "^3.6.2"
   },
-  "lint-staged": {
-    "*.{ts,tsx}": [
-      "prettier --write",
-      "eslint --fix --prefix client"
-    ],
-    "*.{json,md,css}": [
-      "prettier --write"
-    ]
-  }
+"lint-staged": {
+  "*.{ts,tsx}": [
+    "prettier --write",
+    "npm --prefix client exec eslint --fix"
+  ],
+  "*.{json,md,css}": [
+    "prettier --write"
+  ]
 }
