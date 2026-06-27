@@ -6,3 +6,12 @@ backend/.env
 frontend/node_modules
 frontend/package-lock.json
 
+server/dist
+server/node_modules
+
+node_modules
+node_modules
+
+client/node_modules
+client/package-lock.json
+client/dist
