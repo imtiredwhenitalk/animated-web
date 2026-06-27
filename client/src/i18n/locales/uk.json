@@ -1,0 +1,57 @@
+{
+  "nav": {
+    "solarSystem": "Сонячна система",
+    "constellation": "Сузір'я",
+    "currentPlanet": "Поточна планета",
+    "moveTo": "Перейти до",
+    "backTo": "Назад до",
+    "settings": "Налаштування"
+  },
+  "solarSystem": {
+    "title": "Сонячна система",
+    "subtitle": "Досліджуйте наш космічний дім",
+    "explore": "Дослідити"
+  },
+  "planet": {
+    "learnMore": "Дізнатися більше",
+    "facts": "Ключові факти"
+  },
+  "constellation": {
+    "title": "Сузір'я",
+    "subtitle": "Орієнтуйтесь у нічному небі",
+    "latinName": "Латинська назва",
+    "zodiacSign": "Знак зодіаку",
+    "description": "Опис",
+    "distance": "Відстань",
+    "mainStars": "Головні зірки",
+    "visibilitySeason": "Сезон видимості",
+    "hint": "Наведіть на зірки та сузір'я · Натисніть для дослідження"
+  },
+  "settings": {
+    "title": "Налаштування",
+    "localization": "Локалізація",
+    "language": "Мова",
+    "theme": "Тема",
+    "themeDark": "Темна",
+    "themeLight": "Світла",
+    "themeAuto": "Авто",
+    "graphicsQuality": "Якість графіки",
+    "qualityLow": "Низька",
+    "qualityMedium": "Середня",
+    "qualityHigh": "Висока",
+    "qualityUltra": "Ультра",
+    "animations": "Анімації",
+    "backgroundVideo": "Фонове відео",
+    "music": "Музика",
+    "soundEffects": "Звукові ефекти",
+    "fpsCounter": "Лічильник FPS",
+    "cameraSensitivity": "Чутливість камери",
+    "resetSettings": "Скинути налаштування",
+    "about": "Про додаток",
+    "version": "Версія",
+    "github": "Переглянути на GitHub"
+  },
+  "loader": {
+    "loading": "Завантаження космосу..."
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "nav": {
+    "solarSystem": "Solar System",
+    "constellation": "Constellation",
+    "currentPlanet": "Current Planet",
+    "moveTo": "Move to",
+    "backTo": "Back",
+    "settings": "Settings"
+  },
+  "solarSystem": {
+    "title": "Solar System",
+    "subtitle": "Explore our cosmic neighborhood",
+    "explore": "Explore"
+  },
+  "planet": {
+    "learnMore": "Learn more",
+    "facts": "Key Facts"
+  },
+  "constellation": {
+    "title": "Constellations",
+    "subtitle": "Navigate the night sky",
+    "latinName": "Latin Name",
+    "zodiacSign": "Zodiac Sign",
+    "description": "Description",
+    "distance": "Distance",
+    "mainStars": "Main Stars",
+    "visibilitySeason": "Visibility Season",
+    "hint": "Hover stars and constellations · Click to explore"
+  },
+  "settings": {
+    "title": "Settings",
+    "localization": "Localization",
+    "language": "Language",
+    "theme": "Theme",
+    "themeDark": "Dark",
+    "themeLight": "Light",
+    "themeAuto": "Auto",
+    "graphicsQuality": "Graphics Quality",
+    "qualityLow": "Low",
+    "qualityMedium": "Medium",
+    "qualityHigh": "High",
+    "qualityUltra": "Ultra",
+    "animations": "Animations",
+    "backgroundVideo": "Background Video",
+    "music": "Music",
+    "soundEffects": "Sound Effects",
+    "fpsCounter": "FPS Counter",
+    "cameraSensitivity": "Camera Sensitivity",
+    "resetSettings": "Reset Settings",
+    "about": "About Application",
+    "version": "Version",
+    "github": "View on GitHub"
+  },
+  "loader": {
+    "loading": "Loading cosmos..."
+  }
+}

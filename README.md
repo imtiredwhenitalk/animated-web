@@ -1,131 +1,189 @@
-# 🚀 Animated Web
+# COSMOS — Animated Web
 
-An interactive space exploration website built with React, TypeScript, Vite and Tailwind CSS.
+An interactive space exploration website built with React, TypeScript, Three.js, and Node.js.
 
-## 🌌 About
+## Screenshots
 
-Animated Web is a modern web application dedicated to space, astronomy and the beauty of the universe.
+> Screenshot placeholders — add images to `docs/screenshots/` when available.
 
-The project aims to create an immersive experience where users can explore planets, constellations and celestial objects through smooth animations, interactive elements and 3D graphics.
 
-## ✨ Features
+- **Solar System** — Fullscreen `cosmos.mp4` video background with planet navigation grid
+- **Planet Pages** — React Three Fiber scenes with realistic lighting, atmosphere, bloom, stars, and orbit controls
+- **Constellation Explorer** — Interactive night sky with zodiac constellations, hover tooltips, and glow animations
+- **Settings** — i18n (English/Ukrainian), theme, graphics quality, animation toggles, FPS counter
+- **Dynamic Navigation** — Auto-generated routes from a single `shared/planets.ts` config
+- **REST API** — Versioned backend (`/api/v1`) with clean architecture
+- **Docker** — One-command startup with hot reload in development
 
-### Current Features
+## Tech Stack
 
-* Responsive design
-* Modern UI with Tailwind CSS
-* React + TypeScript architecture
-* Mobile navigation menu
-* Component-based structure
-* Fast build with Vite
+| Layer | Technologies |
+|-------|-------------|
+| Frontend | React 19, TypeScript, Vite, Tailwind CSS 4, Framer Motion |
+| 3D | Three.js, React Three Fiber, Drei, Postprocessing |
+| Backend | Node.js, Express 5, TypeScript, Zod |
+| DevOps | Docker Compose, Nginx (production) |
+| Tooling | ESLint, Prettier, Husky, lint-staged |
 
-### Planned Features
+## Project Structure
 
-* 🌍 Interactive Solar System
-* 🪐 Detailed planet pages
-* ⭐ Constellation explorer
-* 🌠 Animated star field
-* 🌌 Deep space backgrounds
-* 🎥 Video backgrounds
-* 🎮 Interactive 3D objects
-* 🚀 Space missions timeline
-* 🔭 Astronomy information hub
-* 🌙 Realistic planet rotations
-* ☄️ Asteroid and comet visualizations
-* 📱 Full mobile support
-* 🎨 Advanced animations with Framer Motion
-* 🌐 Three.js / React Three Fiber integration
-
-## 🛠️ Tech Stack
-
-### Frontend
-
-* React
-* TypeScript
-* Vite
-* Tailwind CSS
-* Framer Motion (planned)
-* React Three Fiber (planned)
-
-### Backend
-
-* Node.js
-* Express.js
-* TypeScript
-
-### Future Integrations
-
-* NASA APIs
-* Astronomy APIs
-* 3D Models
-* Real-time space data
-
-## 📂 Project Structure
-
-```text
-frontend/
-├── src/
-│   ├── assets/
-│   ├── components/
-│   │   ├── Hero.tsx
-│   │   ├── Navbar.tsx
-│   │   └── Loader.tsx
-│   ├── site/
-│   ├── App.tsx
-│   └── main.tsx
-│
-backend/
-├── src/
-│   ├── controllers/
-│   ├── middleware/
-│   ├── routes/
-│   ├── services/
-│   ├── types/
-│   ├── app.ts
-│   └── server.ts
+```
+animated-web/
+├── client/              # React frontend (Vite)
+│   ├── src/
+│   │   ├── components/  # Navbar, Loader, PlanetScene, etc.
+│   │   ├── pages/       # SolarSystem, Planet, Constellation, Settings
+│   │   ├── i18n/        # English & Ukrainian translations
+│   │   └── store/       # Zustand settings store
+│   └── public/assets/   # Video assets (cosmos.mp4, etc.)
+├── server/              # Express API
+│   └── src/
+│       ├── config/      # Environment validation
+│       ├── controllers/
+│       ├── middleware/
+│       ├── repositories/
+│       ├── routes/v1/
+│       ├── services/
+│       └── utils/
+├── shared/              # Shared TypeScript config
+│   ├── planets.ts       # Single source of truth for planets
+│   ├── constellations.ts
+│   └── types.ts
+├── docker/              # Dockerfiles & compose configs
+├── configs/             # Prettier & shared configs
+└── scripts/             # Development scripts
 ```
 
-## 🚀 Getting Started
+## Installation
 
-Clone the repository:
+### Prerequisites
+
+- Node.js 22+
+- npm 10+
+- Docker & Docker Compose (optional)
+
+### Local Setup
 
 ```bash
 git clone <repository-url>
-```
+cd animated-web
 
-Install dependencies:
-
-```bash
+# Install all dependencies
 npm install
-```
+npm install --prefix client
+npm install --prefix server
 
-Run development server:
-
-```bash
+# Start development (client + server)
 npm run dev
 ```
 
-## 🎯 Project Goals
+- Frontend: http://localhost:5173
+- Backend: http://localhost:3000
+- Health check: http://localhost:3000/api/health
 
-The main goal of this project is to create an engaging educational platform about space while experimenting with modern frontend technologies, animations and 3D web development.
+## Docker
 
-## 📈 Roadmap
+Start the entire application with one command:
 
-* [x] Initial project setup
-* [x] Responsive navigation
-* [x] Hero section
-* [ ] Custom animated loader
-* [ ] Video background
-* [ ] Planet system
-* [ ] Constellation map
-* [ ] React Three Fiber integration
-* [ ] Space API integration
-* [ ] Interactive galaxy
-* [ ] Production release
+```bash
+docker compose up --build
+```
 
-## 👨‍💻 Author
+This starts:
+- **client** on port 5173 (Vite dev server with hot reload)
+- **server** on port 3000 (nodemon with hot reload)
 
-Created with ❤️ and curiosity about the universe.
+Production build:
 
-"The universe is under no obligation to make sense to you."
-— Neil deGrasse Tyson
+```bash
+npm run docker:prod
+# or
+docker compose -f docker/docker-compose.prod.yml up --build
+```
+
+## Development
+
+```bash
+# Frontend only
+npm run dev:client
+
+# Backend only
+npm run dev:server
+
+# Run tests
+npm test
+
+# Lint
+npm run lint
+
+# Format
+npm run format
+```
+
+### Environment Variables
+
+**Server** (`server/.env`):
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `PORT` | `3000` | Server port |
+| `NODE_ENV` | `development` | Environment |
+| `ALLOWED_ORIGINS` | `http://localhost:5173` | CORS origins (comma-separated) |
+| `LOG_LEVEL` | `info` | Log level |
+
+**Client**:
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `VITE_API_BASE_URL` | `http://localhost:3000/api/v1` | API base URL |
+
+## Production
+
+```bash
+npm run build
+```
+
+Builds both client (static assets) and server (compiled TypeScript).
+
+## API
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/health` | Health check |
+| GET | `/api/v1/health` | Versioned health check |
+| GET | `/api/v1/planets` | List all planets |
+| GET | `/api/v1/planets/:id` | Get planet by ID or slug |
+| GET | `/api/v1/planets/metrics` | Analytics metrics |
+
+## Roadmap
+
+- [x] Interactive Solar System page with video background
+- [x] React Three Fiber planet rendering
+- [x] Constellation explorer
+- [x] Settings with i18n (EN/UK)
+- [x] Dynamic planet routing
+- [x] Docker Compose setup
+- [x] Clean backend architecture
+- [ ] NASA API integration
+- [ ] Real texture maps for planets
+- [ ] WebGL2 particle effects
+- [ ] PWA / offline support
+- [ ] User accounts & favorites
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+Please run `npm run lint` and `npm test` before submitting.
+
+## License
+
+ISC
+
+---
+
+*"The universe is under no obligation to make sense to you."* — Neil deGrasse Tyson
