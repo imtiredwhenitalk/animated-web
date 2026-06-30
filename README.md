@@ -186,4 +186,9 @@ ISC
 
 ---
 
+## Main Author 
+
+# Solo Full-Stack Developer Melnyk Oleksandr
+# Planet Designer x Main Designer Zinchenko Daryna
+
 *"The universe is under no obligation to make sense to you."* — Neil deGrasse Tyson
